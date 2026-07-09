@@ -1,0 +1,15 @@
+{
+  "name": "graphvuln-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "GraphVuln — Node.js/Express/React/Electron forensic security scanner for GDScript & GraphQL.",
+  "scripts": {
+    "install:all": "cd server && npm install && cd ../client && npm install && cd ../electron && npm install",
+    "build:client": "cd client && npm run build",
+    "start": "npm run build:client && cd electron && npm start",
+    "build:win": "npm run build:client && cd electron && npm run build:win",
+    "build:win:portable": "npm run build:client && cd electron && npm run build:win:portable",
+    "build:linux": "npm run build:client && cd electron && npm run build:linux",
+    "build:mac": "npm run build:client && cd electron && npm run build:mac"
+  }
+}

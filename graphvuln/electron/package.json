@@ -1,0 +1,76 @@
+{
+  "name": "graphvuln-desktop",
+  "version": "1.0.0",
+  "description": "GraphVuln desktop app - Electron shell around the GraphVuln forensic dashboard.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "vendor": "node scripts/prebuild.js",
+    "build:win": "npm run vendor && electron-builder --win --x64",
+    "build:win:portable": "npm run vendor && electron-builder --win --x64 --dir",
+    "build:linux": "npm run vendor && electron-builder --linux --x64",
+    "build:mac": "npm run vendor && electron-builder --mac --x64",
+    "build:all": "npm run vendor && electron-builder --win --linux --mac"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "graphql": "^16.14.2",
+    "graphql-http": "^1.22.4",
+    "ruru": "^2.0.0"
+  },
+  "build": {
+    "appId": "com.graphvuln.desktop",
+    "productName": "GraphVuln",
+    "files": [
+      "main.js",
+      "vendor/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "output": "../dist-desktop"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "../misc-logo/icon.ico"
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "../misc-logo/icon.png",
+      "category": "Development"
+    },
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true
+    }
+  },
+  "devDependencies": {
+    "electron": "^43.1.0",
+    "electron-builder": "^26.0.20"
+  }
+}
